@@ -1,0 +1,2 @@
+BOOTSTRAP_SERVERS=mongoiothub.servicebus.windows.net:9093
+SASL_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mongoiothub.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=5JY/F23oRliW1R/G77QHuqzakjRyGzRDZR80OHEkSC0=";
