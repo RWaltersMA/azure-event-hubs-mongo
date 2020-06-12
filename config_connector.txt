@@ -1,0 +1,35 @@
+
+SOURCE EXAMPLE
+
+curl -X POST -H "Content-Type: application/json" --data '
+  {"name": "mongo-source-stockdata",
+   "config": {
+     "tasks.max":"1",
+     "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
+     "key.converter":"org.apache.kafka.connect.json.JsonConverter",
+     "key.converter.schemas.enable":false,
+     "value.converter":"org.apache.kafka.connect.json.JsonConverter",
+     "value.converter.schemas.enable":false,
+     "publish.full.document.only": true,
+    "connection.uri":"{{REPLACE WITH MONGODB ATLAS CONNECTION STRING}}",
+     "topic.prefix":"demo",
+     "database":"EventHubDemo",
+     "collection":"Source"
+}}' http://localhost:8083/connectors -w "\n"
+
+SINK EXAMPLE
+
+curl -X POST -H "Content-Type: application/json" --data '
+  {"name": "mongo-atlas-sink",
+   "config": {
+     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+     "tasks.max":"1",
+     "topics":"demo.EventHubDemo.Source",
+     "connection.uri":"{{REPLACE WITH MONGODB ATLAS CONNECTION STRING}}",
+     "database":"EventHubDemo",
+     "collection":"Sink",
+     "key.converter":"org.apache.kafka.connect.json.JsonConverter",
+     "key.converter.schemas.enable":false,
+     "value.converter":"org.apache.kafka.connect.json.JsonConverter",
+     "value.converter.schemas.enable":false
+}}' http://localhost:8083/connectors -w "\n"
