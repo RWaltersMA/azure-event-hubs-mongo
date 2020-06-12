@@ -89,9 +89,6 @@ def main():
 
     MONGO_URI=args.connection
 
-    print('Connecting to ' + MONGO_URI)
-    print(args.write)
-
     threads = []
 
     generate_securities(args.symbols)
