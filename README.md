@@ -25,7 +25,7 @@ Python application usage:
 python3 create-stock-data.py <parameter_list>
 
 | Parameter | Default Value | Description |
-| --- | --- |
+| --- | --- | --- |
 | -s | 10 | The number of financial stock symbols to generate |
 | -c | mongodb://localhost | The connection to a MongoDB cluster |
 | -d | Stocks | The database to read and write to |
