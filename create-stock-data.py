@@ -78,7 +78,8 @@ def main():
     parser.add_argument("-c","--connection", default='mongodb://localhost', help="MongoDB connection string")
     #if running inside a docker container on the localnet network use default= mongodb://mongo1:27017,mongo2:27018,mongo3:27019/?replicaSet=rs0
     parser.add_argument("-d","--database", default='Stocks', help="MongoDB database name")
-    parser.add_argument("-l","--collection", default='StockData', help="MongoDB collection name")
+    parser.add_argument("-w","--write", default='Source', help="MongoDB write to collection name")
+    parser.add_argument("-r","--read", default='Sink', help="MongoDB read from collection")
   
     args = parser.parse_args()
 
@@ -89,6 +90,7 @@ def main():
     MONGO_URI=args.connection
 
     print('Connecting to ' + MONGO_URI)
+    print(args.write)
 
     threads = []
 
@@ -110,7 +112,7 @@ def display():
         db = c.get_database(name=args.database)
         resume_token = None
         pipeline = [{'$match': {'operationType': 'insert'}}]
-        with db[args.collection].watch(pipeline) as stream:
+        with db[args.read].watch(pipeline) as stream:
             for insert_change in stream:
                 print(insert_change["fullDocument"])
                 resume_token = stream.resume_token
@@ -119,10 +121,10 @@ def display():
             print('Failure during change stream initialization')
             raise
         else:
-            with db[args.collection].watch(
+            with db[args.read].watch(
                 pipeline, resume_after=resume_token) as stream:
                 for insert_change in stream:
-                    print(insert_change)
+                    print(insert_change["fullDocument"])
     except:
         print('READ: Unexpected error :', sys.exc_info()[0])
         raise
@@ -157,7 +159,7 @@ def worker(workerthread, numofsymbols):
                 try:
                     #For now we are writing a flat schema model (one document per data point) since the demo focus is the data flow through Kafka
                     #For performance you would want to use a fixed based schema for time-series data in MongoDB
-                    result=db[args.collection].insert_one( { 'company_symbol' : company_symbol[i], 'company_name': company_name[i],'price': x, 'tx_time': txtime.strftime('%Y-%m-%dT%H:%M:%SZ')})
+                    result=db[args.write].insert_one( { 'company_symbol' : company_symbol[i], 'company_name': company_name[i],'price': x, 'tx_time': txtime.strftime('%Y-%m-%dT%H:%M:%SZ')})
                     if write_status==False:
                         print('WRITE: Successfully writing stock data')
                         write_status=True
