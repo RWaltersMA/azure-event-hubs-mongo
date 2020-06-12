@@ -7,14 +7,16 @@ This repository is used with a blog post that demonstrats how to setup the Mongo
 | docker-compose.yml | Docker Compose file that launches Kafka Connect container |
 | Dockerfile-MongoConnect | Docker file that installs the MongoDB Connector for Apache Kafka |
 
-|Python files|Description|
-|create-stock-data.py|Python application that creates ficticious stock data|
-|adjectives.txt|Support file for python application|
-|endings.txt|Support file for python application|
-|nouns.txt|Support file for python application|
+| Python files | Description |
+| --- | --- |
+| create-stock-data.py | Python application that creates ficticious stock data |
+| adjectives.txt | Support file for python application |
+| endings.txt | Support file for python application |
+| nouns.txt | Support file for python application |
 
-|KafkaCat files|Description|
-|kc.config|Config file used to make it easier to use KafkaCat with Azure Event Hubs|
+| KafkaCat files | Description|
+| --- | --- |
+| kc.config | Config file used to make it easier to use KafkaCat with Azure Event Hubs|
 
 See the blog post (link TBD) for a walk through on creating an Azure Event Hub, running the docker containers and configuring the MongoDB Connector for Apache Kafka.
 
@@ -22,12 +24,13 @@ Python application usage:
 
 python3 create-stock-data.py <parameter_list>
 
-|Parameter|Default Value|Description|
-|-s|10|The number of financial stock symbols to generate|
-|-c|mongodb://localhost|The connection to a MongoDB cluster|
-|-d|Stocks|The database to read and write to|
-|-w|Source|The collection name to insert into|
-|-r|Sink|The collection name to read from|
+| Parameter | Default Value | Description |
+| --- | --- |
+| -s | 10 | The number of financial stock symbols to generate |
+| -c | mongodb://localhost | The connection to a MongoDB cluster |
+| -d | Stocks | The database to read and write to |
+| -w | Source | The collection name to insert into |
+| -r | Sink | The collection name to read from |
 
 This application randomly generates a number of stocks and their initial values.  It will write new values every second for all securities into the collection defined with the “-w” parameter.  If we configured the source and sink correctly in the previous section, as the data arrives in the collection, Kafka Connect will push the data into the Azure Event Hub.  From there the Sink will notice the data in the Azure Event Hub and write it to the collection defined in the “-r” parameter.  
 
