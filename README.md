@@ -32,7 +32,7 @@ python3 create-stock-data.py <parameter_list>
 | -w | Source | The collection name to insert into |
 | -r | Sink | The collection name to read from |
 
-This application randomly generates a number of stocks and their initial values.  It will write new values every second for all securities into the collection defined with the “-w” parameter.  If we configured the source and sink correctly in the previous section, as the data arrives in the collection, Kafka Connect will push the data into the Azure Event Hub.  From there the Sink will notice the data in the Azure Event Hub and write it to the collection defined in the “-r” parameter.  
+This application randomly generates a number of stocks and their initial values.  It will write new values every second for all securities into the collection defined with the “-w” parameter.  
 
 The output of the python application resembles the following:
 
