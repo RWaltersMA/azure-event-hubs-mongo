@@ -2,9 +2,10 @@
 
 This repository is used with a blog post that demonstrats how to setup the MongoDB Connector for Apache Kafka and use it within the Azure Event Hub environment.  It contains the following components:
 
-|Docker Files|Description|
-|docker-compose.yml|Docker Compose file that launches Kafka Connect container|
-|Dockerfile-MongoConnect|Docker file that installs the MongoDB Connector for Apache Kafka|
+| Docker Files | Description |
+| --- | --- |
+| docker-compose.yml | Docker Compose file that launches Kafka Connect container |
+| Dockerfile-MongoConnect | Docker file that installs the MongoDB Connector for Apache Kafka |
 
 |Python files|Description|
 |create-stock-data.py|Python application that creates ficticious stock data|
