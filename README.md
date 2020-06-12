@@ -36,13 +36,13 @@ This application randomly generates a number of stocks and their initial values.
 
 The output of the python application resembles the following:
 
-WRITE: Checking MongoDB Connection
-READ: Connecting to MongoDB
-WRITE: Successfully connected to MongoDB
-WRITE: Successfully writing stock data
-{'_id': ObjectId('5ee3ba865149c02cac059014'), 'company_symbol': 'CDC', 'company_name': 'COLOSSAL DRESS CORPORATION', 'price': 91.81, 'tx_time': '2020-06-12T13:25:22Z'}
-{'_id': ObjectId('5ee3ba865149c02cac059015'), 'company_symbol': 'PEP', 'company_name': 'PROUD ECLIPSE PRODUCTIONS', 'price': 52.05, 'tx_time': '2020-06-12T13:25:22Z'}
-{'_id': ObjectId('5ee3ba865149c02cac059017'), 'company_symbol': 'MSV', 'company_name': 'MINUTE SEED VENTURES', 'price': 79.03, 'tx_time': '2020-06-12T13:25:22Z'}
-…
+WRITE: Checking MongoDB Connection<br>
+READ: Connecting to MongoDB<br>
+WRITE: Successfully connected to MongoDB<br>
+WRITE: Successfully writing stock data<br>
+{'_id': ObjectId('5ee3ba865149c02cac059014'), 'company_symbol': 'CDC', 'company_name': 'COLOSSAL DRESS CORPORATION', 'price': 91.81, 'tx_time': '2020-06-12T13:25:22Z'}<br>
+{'_id': ObjectId('5ee3ba865149c02cac059015'), 'company_symbol': 'PEP', 'company_name': 'PROUD ECLIPSE PRODUCTIONS', 'price': 52.05, 'tx_time': '2020-06-12T13:25:22Z'}<br>
+{'_id': ObjectId('5ee3ba865149c02cac059017'), 'company_symbol': 'MSV', 'company_name': 'MINUTE SEED VENTURES', 'price': 79.03, 'tx_time': '2020-06-12T13:25:22Z'}<br>
+…<br>
 
 The application spins up two threads, one to write the data every second and the other to open a change stream against the collection defined in the “-r” parameter.  Following the successful “writing stock data” message you will see the data being read from the change stream on the sink.  This data has made the trip from the source collection out to Azure Event Hub and back to a sink collection.
